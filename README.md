@@ -14,14 +14,25 @@ Currently this container comes with following tools:
 * tcpdump
 * traceroute
 
+In addition to the tools, the container can be launched as a simple webserver. Webserver is just a hello-world made with python flask, but will be suitable for http debugging inside kubernetes clusters.
+
 ## Build
 
 ```
-docker build -t netdbg .
+docker build -t toimela/netdbg .
 ```
 
 ## Usage
 
+### Client
 ```
-docker run -ti --name netdbg netdbg /bin/bash
+docker run -ti --name netdbg toimela/netdbg /bin/bash
+```
+
+### Server
+```
+docker run -d -p 80:80 --name netdbg-server toimela/netdbg
+
+# Or with Kubernetes:
+kubectl create -f manifests/netdbg-server.yaml
 ```
